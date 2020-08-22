@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayoutManager recyclerViewLinearLayoutManager;
 
     private ArrayList<News> news;
-    private boolean isLoading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         news = new ArrayList<News>();
-        news.add(null);
 
         swipeRefreshLayout = (SwipeRefreshLayout) this.findViewById(R.id.swipeRefreshLayout);
         recyclerView = (RecyclerView) this.findViewById(R.id.recyclerView);
@@ -53,9 +51,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onRefresh() {
                 news.clear();
-                news.add(null);
                 newsRecyclerViewAdapter.notifyDataSetChanged();
-                swipeRefreshLayout.setRefreshing(false);
+                loadElements();
             }
         });
     }
@@ -70,24 +67,11 @@ public class MainActivity extends AppCompatActivity {
                 LinearLayoutManager.VERTICAL, false);
         this.recyclerView.setLayoutManager(recyclerViewLinearLayoutManager);
 
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-
-                if (isLoading
-                        || recyclerViewLinearLayoutManager == null
-                        || recyclerViewLinearLayoutManager.findLastCompletelyVisibleItemPosition()
-                        != news.size() - 1)
-                    return;
-
-                loadElements();
-            }
-        });
+        loadElements();
     }
 
     private void loadElements() {
-        isLoading = true;
+        swipeRefreshLayout.setRefreshing(true);
         String url = String.format(lastNews, apiKey);
 
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -96,27 +80,17 @@ public class MainActivity extends AppCompatActivity {
             new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    if (news.size() > 0) {
-                        int removePosition = news.size() - 1;
-                        news.remove(removePosition);
-                        newsRecyclerViewAdapter.notifyItemRemoved(removePosition);
-                    }
-
                     int previousIndex = news.size();
-
                     List<News> loadedNews = new Gson().fromJson(response, LastNewsResponse.class).getNews();
-                    loadedNews.add(null);
-
                     news.addAll(loadedNews);
-
                     newsRecyclerViewAdapter.notifyItemRangeInserted(previousIndex, news.size());
 
-                    isLoading = false;
+                    swipeRefreshLayout.setRefreshing(false);
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    isLoading = false;
+                    swipeRefreshLayout.setRefreshing(false);
                 }
             }
         );

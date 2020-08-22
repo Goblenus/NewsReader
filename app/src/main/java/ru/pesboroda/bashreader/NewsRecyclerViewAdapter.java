@@ -30,15 +30,6 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
         }
     }
 
-    public class LoadingViewHolder extends RecyclerView.ViewHolder {
-        LoadingViewHolder(@NonNull View itemView) {
-            super(itemView);
-        }
-    }
-
-    private final int VIEW_TYPE_ITEM = 0;
-    private final int VIEW_TYPE_LOADING = 1;
-
     List<News> news;
 
     NewsRecyclerViewAdapter(List<News> news){
@@ -52,28 +43,21 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        if (viewType == VIEW_TYPE_ITEM) {
-            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card_layout, viewGroup, false);
-            return new NewsViewHolder(v);
-        }
-
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.loading_layout, viewGroup, false);
-        return new LoadingViewHolder(v);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card_layout, viewGroup, false);
+        return new NewsViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i) {
-        if (viewHolder instanceof NewsViewHolder) {
-            NewsViewHolder newsViewHolder = (NewsViewHolder) viewHolder;
-            newsViewHolder.authorView.setText(news.get(i).getAuthor());
-            newsViewHolder.titleView.setText(news.get(i).getTitle());
-            newsViewHolder.descriptionView.setText(news.get(i).getDescription());
-            newsViewHolder.languageView.setText(news.get(i).getLanguage());
-        }
+        NewsViewHolder newsViewHolder = (NewsViewHolder) viewHolder;
+        newsViewHolder.authorView.setText(news.get(i).getAuthor());
+        newsViewHolder.titleView.setText(news.get(i).getTitle());
+        newsViewHolder.descriptionView.setText(news.get(i).getDescription());
+        newsViewHolder.languageView.setText(news.get(i).getLanguage());
     }
 
     @Override
     public int getItemViewType(int position) {
-        return news.get(position) == null ? VIEW_TYPE_LOADING : VIEW_TYPE_ITEM;
+        return super.getItemViewType(position);
     }
 }
