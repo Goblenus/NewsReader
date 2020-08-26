@@ -1,11 +1,15 @@
 package ru.pesboroda.bashreader;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -29,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle actionBarDrawerToggle;
+    private Toolbar navigationActionBar;
 
     private NewsRecyclerViewAdapter newsRecyclerViewAdapter;
     private LinearLayoutManager recyclerViewLinearLayoutManager;
@@ -44,9 +51,30 @@ public class MainActivity extends AppCompatActivity {
 
         swipeRefreshLayout = (SwipeRefreshLayout) this.findViewById(R.id.swipeRefreshLayout);
         recyclerView = (RecyclerView) this.findViewById(R.id.recyclerView);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+        navigationActionBar = (Toolbar) findViewById(R.id.navigation_action_bar);
+
+        setSupportActionBar(navigationActionBar);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout,
+                R.string.open_drawer, R.string.close_drawer);
+
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         initRecyclerView();
+        initUpdateListener();
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (actionBarDrawerToggle.onOptionsItemSelected(item))
+            return true;
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void initUpdateListener() {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -58,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initRecyclerView() {
-
         this.recyclerView.setHasFixedSize(true);
 
         this.newsRecyclerViewAdapter = new NewsRecyclerViewAdapter(news);
