@@ -146,9 +146,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View view) {
                 int itemPosition = recyclerView.getChildLayoutPosition(view);
-                // TODO:
-                // open webview
-                Toast.makeText(MainActivity.this, "Id: " + itemPosition, Toast.LENGTH_SHORT).show();
+                Intent webViewIntent = new Intent(MainActivity.this,
+                        WebViewActivity.class);
+                webViewIntent.putExtra("Url", news.get(itemPosition).getUrl());
+                startActivity(webViewIntent);
             }
         });
         this.recyclerView.setAdapter(this.newsRecyclerViewAdapter);
