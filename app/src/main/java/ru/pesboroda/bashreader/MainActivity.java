@@ -12,7 +12,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -52,10 +51,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private ArrayList<News> news;
 
+    private String lastLanguageCode;
+
+    @Override
+    protected void onResume() {
+        loadLastNews(false);
+        super.onResume();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        lastLanguageCode = null;
 
         sharedPreferences = this.getSharedPreferences(getString(R.string.settings_file_name),
                 MODE_PRIVATE);
@@ -125,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                loadLastNews();
+                loadLastNews(true);
             }
         });
     }
@@ -147,16 +156,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 LinearLayoutManager.VERTICAL, false);
         this.recyclerView.setLayoutManager(recyclerViewLinearLayoutManager);
 
-        loadLastNews();
+        loadLastNews(true);
     }
 
-    private void loadLastNews() {
-        String settingsLanguage = sharedPreferences.getString(
+    private void loadLastNews(boolean force) {
+        String languageCode = sharedPreferences.getString(
                 getString(R.string.settings_language_code_id),
                 getString(R.string.settings_language_code_default));
 
+        if (!force && languageCode != null && languageCode.equals(lastLanguageCode)) {
+            return;
+        }
+        lastLanguageCode = languageCode;
+
         swipeRefreshLayout.setRefreshing(true);
-        String url = String.format(lastNews, apiKey, settingsLanguage);
+        String url = String.format(lastNews, apiKey, languageCode);
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
