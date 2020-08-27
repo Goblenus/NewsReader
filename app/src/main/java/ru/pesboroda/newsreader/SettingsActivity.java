@@ -1,4 +1,4 @@
-package ru.pesboroda.bashreader;
+package ru.pesboroda.newsreader;
 
 import android.content.DialogInterface;
 import android.content.Intent;

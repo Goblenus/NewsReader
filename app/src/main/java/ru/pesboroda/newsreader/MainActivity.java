@@ -1,4 +1,4 @@
-package ru.pesboroda.bashreader;
+package ru.pesboroda.newsreader;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,8 +28,8 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
-import ru.pesboroda.bashreader.pojo.LastNewsResponse;
-import ru.pesboroda.bashreader.pojo.News;
+import ru.pesboroda.newsreader.pojo.LastNewsResponse;
+import ru.pesboroda.newsreader.pojo.News;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 

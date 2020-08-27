@@ -1,4 +1,4 @@
-package ru.pesboroda.bashreader;
+package ru.pesboroda.newsreader;
 
 import org.junit.Test;
 

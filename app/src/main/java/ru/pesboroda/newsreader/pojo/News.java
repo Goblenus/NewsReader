@@ -1,4 +1,4 @@
-package ru.pesboroda.bashreader.pojo;
+package ru.pesboroda.newsreader.pojo;
 
 import java.util.HashMap;
 import java.util.List;

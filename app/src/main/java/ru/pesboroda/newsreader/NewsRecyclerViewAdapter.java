@@ -1,4 +1,4 @@
-package ru.pesboroda.bashreader;
+package ru.pesboroda.newsreader;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import ru.pesboroda.bashreader.pojo.News;
+import ru.pesboroda.newsreader.pojo.News;
 
 public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     private View.OnClickListener onClickListener;
