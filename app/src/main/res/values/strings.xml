@@ -4,4 +4,11 @@
     <string name="language">Language:</string>
     <string name="open_drawer">Open</string>
     <string name="close_drawer">Close</string>
+    <string name="nav_settings">Settings</string>
+    <string name="nav_last_news">Last news</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="settings_language_code_id">settings_language_code</string>
+    <string name="settings_language_code_default">en</string>
+    <string name="settings_file_name">settings_file</string>
+    <string name="choose_language">Choose language</string>
 </resources>

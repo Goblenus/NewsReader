@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="arabic">
+        <item name="name">Arabic</item>
+        <item name="code">ar</item>
+    </string-array>
+    <string-array name="chinese">
+        <item name="name">Chinese</item>
+        <item name="code">zh</item>
+    </string-array>
+    <string-array name="dutch">
+        <item name="name">Dutch</item>
+        <item name="code">nl</item>
+    </string-array>
+    <string-array name="english">
+        <item name="name">English</item>
+        <item name="code">en</item>
+    </string-array>
+    <string-array name="finnish">
+        <item name="name">Finnish</item>
+        <item name="code">fi</item>
+    </string-array>
+    <string-array name="french">
+        <item name="name">French</item>
+        <item name="code">fr</item>
+    </string-array>
+    <string-array name="german">
+        <item name="name">German</item>
+        <item name="code">de</item>
+    </string-array>
+    <string-array name="hindi">
+        <item name="name">Hindi</item>
+        <item name="code">hi</item>
+    </string-array>
+    <string-array name="italian">
+        <item name="name">Italian</item>
+        <item name="code">it</item>
+    </string-array>
+    <string-array name="japanese">
+        <item name="name">Japanese</item>
+        <item name="code">ja</item>
+    </string-array>
+    <string-array name="korean">
+        <item name="name">Korean</item>
+        <item name="code">ko</item>
+    </string-array>
+    <string-array name="malay">
+        <item name="name">Malay</item>
+        <item name="code">msa</item>
+    </string-array>
+    <string-array name="portuguese">
+        <item name="name">Portuguese</item>
+        <item name="code">pt</item>
+    </string-array>
+    <string-array name="russian">
+        <item name="name">Russian</item>
+        <item name="code">ru</item>
+    </string-array>
+    <string-array name="spanish">
+        <item name="name">Spanish</item>
+        <item name="code">es</item>
+    </string-array>
+
+    <array name="languages">
+        <item>@array/arabic</item>
+        <item>@array/chinese</item>
+        <item>@array/dutch</item>
+        <item>@array/english</item>
+        <item>@array/finnish</item>
+        <item>@array/french</item>
+        <item>@array/german</item>
+        <item>@array/hindi</item>
+        <item>@array/italian</item>
+        <item>@array/japanese</item>
+        <item>@array/korean</item>
+        <item>@array/malay</item>
+        <item>@array/portuguese</item>
+        <item>@array/russian</item>
+        <item>@array/spanish</item>
+    </array>
+</resources>

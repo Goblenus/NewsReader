@@ -13,6 +13,7 @@ import java.util.List;
 import ru.pesboroda.bashreader.pojo.News;
 
 public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+    private View.OnClickListener onClickListener;
 
     public class NewsViewHolder extends RecyclerView.ViewHolder {
         TextView authorView;
@@ -32,8 +33,9 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     List<News> news;
 
-    NewsRecyclerViewAdapter(List<News> news){
+    NewsRecyclerViewAdapter(List<News> news, View.OnClickListener onClickListener){
         this.news = news;
+        this.onClickListener = onClickListener;
     }
 
     @Override
@@ -44,6 +46,7 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card_layout, viewGroup, false);
+        v.setOnClickListener(onClickListener);
         return new NewsViewHolder(v);
     }
 
