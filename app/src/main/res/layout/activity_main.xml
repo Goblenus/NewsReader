@@ -43,8 +43,6 @@
         app:menu="@menu/navigation_menu"
         android:layout_gravity="start"
         app:headerLayout="@layout/navigation_header"
-        android:id="@+id/navigationView">
-
-    </com.google.android.material.navigation.NavigationView>
+        android:id="@+id/navigationView"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>
